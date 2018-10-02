@@ -24,18 +24,31 @@ public class EmailUtility {
 	private static final String MAIL_TO = "daisy.dzingiso@econet.co.zw";
 	private static final String MAIL_HOST = "mail.econet.co.zw";
 
-	private static final String FILE_PATH = "/staging/cvbs_files";
-	private static final String FILE_HOST = "192.168.81.126";
-	private static final String FILE_USER = "bpm";
+//	private static final String FILE_PATH = "/staging/cvbs_files";
+//	private static final String FILE_HOST = "192.168.81.126";
+//	private static final String FILE_USER = "bpm";
 
-	public static void sendEmail(String filePath) {
+	public static void sendEmail(String filePath, String fileName, 
+			String mailFrom, String mailTo) {
 		
 		if (filePath == "") {
 			filePath = "/staging/cvbs_files/EWZ_ISM_July2018_Bill_Analysis.xlsx";
-		}	
+		}
+		
+		if (fileName == "") {
+			fileName = "test";
+		}
+		
+		if (mailFrom == "") {
+			mailFrom = MAIL_FROM;
+		}
+		
+		if (mailTo == "") {
+			mailTo = MAIL_TO;
+		}
 
 		// Get system properties
-		Properties properties = System.getProperties();
+//		Properties properties = System.getProperties();
 
 		// Setup mail server
 		Properties props = new Properties();
@@ -50,10 +63,10 @@ public class EmailUtility {
 			MimeMessage message = new MimeMessage(session);
 
 			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(MAIL_FROM));
+			message.setFrom(new InternetAddress(mailFrom));
 
 			// Set To: header field of the header.
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(MAIL_TO));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(mailTo));
 
 			// Set Subject: header field
 			message.setSubject("Email proforma invoices to Franchises");
@@ -72,10 +85,9 @@ public class EmailUtility {
 
 			// Part two is attachment
 			messageBodyPart = new MimeBodyPart();
-			String filename = "file.txt";
 			DataSource source = new FileDataSource(filePath);
 			messageBodyPart.setDataHandler(new DataHandler(source));
-			messageBodyPart.setFileName(filename);
+			messageBodyPart.setFileName(fileName);
 			multipart.addBodyPart(messageBodyPart);
 
 			// Send the complete message parts
@@ -88,7 +100,5 @@ public class EmailUtility {
 		} catch (MessagingException mex) {
 			mex.printStackTrace();
 		}
-
 	}
-
 }
