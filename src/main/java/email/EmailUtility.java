@@ -23,7 +23,7 @@ public class EmailUtility {
     private static final String MAIL_FROM = "support@econet.co.zw";
     private static final String MAIL_TO = "daisy.dzingiso@econet.co.zw";
     private static final String MAIL_HOST = "mail.econet.co.zw";
-    private static final int MAIL_PORT = 25;
+    private static final String MAIL_PORT = "25";
     
     public static void main(String[] args) {
         sendEmail("", "", "", "");
@@ -33,7 +33,7 @@ public class EmailUtility {
             String mailFrom, String mailTo) {
 
         if (filePath == "") {
-            filePath = "C:\\temp\\files\\test.txt";
+            filePath = "/tmp/files/test.csv";
         }
 
         if (fileName == "") {
@@ -41,26 +41,22 @@ public class EmailUtility {
         }
 
         if (mailFrom == "") {
-            mailFrom = "timhuynh1301@gmail.com";
+            mailFrom = MAIL_FROM;
         }
 
         if (mailTo == "") {
-            mailTo = "thongh@coutureconsulting.com";
+            mailTo = MAIL_TO;
         }
 
         // Setup mail server
         Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.auth", "false");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.host", MAIL_HOST);
+        props.put("mail.smtp.port", MAIL_PORT);
 
-        Session session = Session.getInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("timhuynh1301@gmail.com", "HTTngu13");
-                    }
-                });
+        // Get the default Session object.
+        Session session = Session.getDefaultInstance(props);
 
         try {
             // Create a default MimeMessage object.
@@ -80,7 +76,7 @@ public class EmailUtility {
             BodyPart messageBodyPart = new MimeBodyPart();
             
             // Fill the message
-            messageBodyPart.setText("This is message body");
+            messageBodyPart.setText("Email proforma invoices to Franchises");
             
             // Create a multipart message
             Multipart multipart = new MimeMultipart();
