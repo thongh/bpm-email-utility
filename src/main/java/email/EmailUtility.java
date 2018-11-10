@@ -23,6 +23,7 @@ public class EmailUtility {
     private static final String MAIL_FROM = "support@econet.co.zw";
     private static final String MAIL_TO = "daisy.dzingiso@econet.co.zw";
     private static final String MAIL_HOST = "mail.econet.co.zw";
+    private static final String MAIL_HOST_IP = "192.168.101.60";
     private static final String MAIL_PORT = "25";
     
     public static void main(String[] args) {
@@ -52,7 +53,7 @@ public class EmailUtility {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "false");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", MAIL_HOST);
+        props.put("mail.smtp.host", MAIL_HOST_IP);
         props.put("mail.smtp.port", MAIL_PORT);
 
         // Get the default Session object.
