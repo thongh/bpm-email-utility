@@ -10,20 +10,16 @@ import org.codemonkey.simplejavamail.TransportStrategy;
 import teamworks.TWList;
 import teamworks.TWObject;
 
+/********************************************************
+ * Java connector to send emails in IBM BPM
+ * 
+ * @author Thong Huynh
+ * ******************************************************
+ */
 public class EmailUtility {
 
-    private static final String MAIL_FROM = "support@econet.co.zw";
-    private static final String MAIL_TO = "daisy.dzingiso@econet.co.zw";
-    private static final String MAIL_HOST = "mail.econet.co.zw";
-    private static final int MAIL_PORT = 25;
-    
     public static void main(String[] args) {
-        sendEmail("smtp.gmail.com", 587, "timhuynh1301@gmail.com", "HTTngu13",
-                "Tim Huynh", "timhuynh1301@gmail.com",
-                "Thong Huynh", "thong.huynh@vsource-software.com",
-                "Test email", "Testing",
-                null,
-                false, true);
+        // Test here
     }
     
 
